@@ -21,6 +21,18 @@ export function buildLoaders({ isDev }: BuildOptions): webpack.RuleSetRule[] {
         ]
     }
 
+    const cssLoader = {
+        test: /\.s[ac]ss$/i,
+        use: [
+            // Creates `style` nodes from js strings
+            'style-loader',
+            // Translates CSS into CommonJS
+            'css-loader',
+            // Compiles Sass to CSS
+            'sass-loader',
+        ]
+    }
+
     const typescriptLoader = {
         test: /\.tsx?$/,
         use: 'ts-loader',
