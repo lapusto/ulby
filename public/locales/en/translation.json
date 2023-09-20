@@ -3,5 +3,7 @@
   "перевод": "translate",
   "lang": "RU",
   "main": "Main page",
-  "notFound": "PAGE NOT FOUND"
+  "notFound": "PAGE NOT FOUND",
+  "errorText": "Oops! Something went wrong",
+  "refresh": "Reload page"
 }
