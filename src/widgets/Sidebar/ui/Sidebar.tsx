@@ -2,7 +2,7 @@ import { FC, useState } from 'react';
 import { classNames as cn } from 'shared/lib/classNames/classNames';
 import { ThemeSwitcher } from 'widgets/ThemeSwitcher';
 import { LangSwitcher } from 'widgets/LangSwitcher';
-import { Button, ButtonVariant } from 'shared/ui/Button/Button';
+import { Button, ButtonSize, ButtonVariant } from 'shared/ui/Button/Button';
 import cls from './Sidebar.module.scss';
 
 interface SidebarProps {
@@ -20,6 +20,8 @@ export const Sidebar: FC<SidebarProps> = ({ className }) => {
             <Button
                 data-testid="sidebar-toggle"
                 type="button"
+                square
+                size={ButtonSize.L}
                 onClick={onToggle}
                 className={cls.collapsedBtn}
                 variant={ButtonVariant.BACKGROUND_INVERTED}

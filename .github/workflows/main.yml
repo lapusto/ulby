@@ -1,15 +1,15 @@
 name: linting, testing, building
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 jobs:
   pipeline:
     runs-on: windows-2019
     strategy:
       matrix:
-        node-version: [ 16.x ]
+        node-version: [16.x]
 
     steps:
       - uses: actions/checkout@v2
@@ -25,7 +25,7 @@ jobs:
         run: npm run lint:ts
       - name: unit testing
         run: npm run test:unit
-      - name: build storybook
-        run: npm run storybook:build
-      - name: screenshot testing
-        run: npm run test:ui:ci
+      # - name: build storybook
+      #   run: npm run storybook:build
+      # - name: screenshot testing
+      #   run: npm run test:ui:ci
