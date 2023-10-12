@@ -30,6 +30,20 @@ Outline.args = {
     variant: ButtonVariant.OUTLINE,
 };
 
+export const OutlineSizeL = Template.bind({});
+OutlineSizeL.args = {
+    children: 'Text',
+    variant: ButtonVariant.OUTLINE,
+    size: ButtonSize.L,
+};
+
+export const OutlineSizeXL = Template.bind({});
+OutlineSizeXL.args = {
+    children: 'Text',
+    variant: ButtonVariant.OUTLINE,
+    size: ButtonSize.XL,
+};
+
 export const OutlineDark = Template.bind({});
 OutlineDark.args = {
     children: 'Text',
