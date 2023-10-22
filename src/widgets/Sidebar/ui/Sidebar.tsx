@@ -5,6 +5,8 @@ import { LangSwitcher } from 'widgets/LangSwitcher';
 import { Button, ButtonSize, ButtonVariant } from 'shared/ui/Button/Button';
 import { AppLink, AppLinkTheme } from 'shared/ui/AppLink/AppLink';
 import { RoutePath } from 'shared/config/routeConfig/routeConfig';
+import AboutIcon from 'shared/assets/icons/list.svg';
+import MainIcon from 'shared/assets/icons/home.svg';
 import cls from './Sidebar.module.scss';
 
 interface SidebarProps {
@@ -31,19 +33,22 @@ export const Sidebar: FC<SidebarProps> = ({ className }) => {
                 {collapsed ? '>' : '<'}
             </Button>
             <div className={cls.items}>
+
                 <AppLink
                     to={RoutePath.main}
                     theme={AppLinkTheme.SECONDARY}
-                    className={cls.link}
+                    className={cls.item}
                 >
-                    Main
+                    <MainIcon className={cls.icon} />
+                    <span className={cls.link}>Main</span>
                 </AppLink>
                 <AppLink
-                    className={cls.link}
                     to={RoutePath.about}
                     theme={AppLinkTheme.SECONDARY}
+                    className={cls.item}
                 >
-                    About
+                    <AboutIcon className={cls.icon} />
+                    <span className={cls.link}>About</span>
                 </AppLink>
             </div>
             <div className={cls.switchers}>
