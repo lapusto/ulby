@@ -10,11 +10,13 @@ describe('counterSlice.test', () => {
     });
 });
 
-describe('counterSlice.test', () => {
-    test('dencrement', () => {
-        const state: CounterSchema = {
-            value: 10,
-        };
-        expect(counterReducer(state, counterActions.decrement)).toEqual({ value: 9 });
-    });
+test('dencrement', () => {
+    const state: CounterSchema = {
+        value: 10,
+    };
+    expect(counterReducer(state, counterActions.decrement)).toEqual({ value: 9 });
+});
+
+test('should work with empty state', () => {
+    expect(counterReducer(undefined, counterActions.increment)).toEqual({ value: 1 });
 });
