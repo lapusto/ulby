@@ -45,7 +45,9 @@ export const Modal: FC<ModalProps> = ({
 
     return (
         <Portal>
-            <div className={cn(cls.Modal, { [cls.opened]: isOpen }, [className, theme])}>
+            <div
+                className={cn(cls.Modal, { [cls.opened]: isOpen }, [className])}
+            >
                 <div className={cls.overlay} onClick={closeHandler}>
                     <div className={cls.content} onClick={onContentClick}>
                         {children}
