@@ -12,9 +12,9 @@ export const LoginForm: FC<LoginFormProps> = ({ className }) => {
     const { t } = useTranslation();
     return (
         <div className={cn(cls.LoginForm, {}, [className])}>
-            <input type="text" />
-            <input type="text" />
-            <Button>
+            <input className={cls.input} type="text" />
+            <input className={cls.input} type="text" />
+            <Button className={cls.loginBtn}>
                 {t('Войти')}
             </Button>
         </div>
