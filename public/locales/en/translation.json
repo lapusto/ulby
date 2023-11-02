@@ -5,5 +5,9 @@
   "main": "Main page",
   "notFound": "PAGE NOT FOUND",
   "errorText": "Oops! Something went wrong",
-  "refresh": "Reload page"
+  "refresh": "Reload page",
+  "Войти": "Login",
+  "an": "eng",
+  "login": "Username",
+  "password": "Password"
 }

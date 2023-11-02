@@ -12,17 +12,28 @@ interface InputProps extends HTMLInputProps {
 }
 
 export const Input: FC<InputProps> = memo(({
-    className, value, onChange, type = 'text', ...props
+    className, value, onChange, type = 'text', placeholder, ...props
 }: InputProps) => {
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         onChange?.(e.target.value);
     };
     return (
-        <div className={cn(cls.Input, {}, [className])}>
+        <div className={cn(cls.InputWrapper, {}, [className])}>
+            {
+                placeholder
+                && (
+                    <div className={cls.placeholder}>
+                        {placeholder}
+                    </div>
+                )
+            }
             <input
                 type={type}
                 value={value}
                 onChange={onChangeHandler}
+                className={cls.input}
+                {...props}
+
             />
         </div>
     );

@@ -1,3 +1,12 @@
-.Input {
-    
+.InputWrapper {
+    display: flex;
+}
+
+.placeholder {
+margin-right: 5px;
+}
+
+.input {
+background: transparent;
+color: var(--primary-color);
 }
