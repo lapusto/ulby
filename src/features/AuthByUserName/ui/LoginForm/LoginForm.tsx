@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { classNames as cn } from 'shared/lib/classNames/classNames';
-import { Button } from 'shared/ui/Button/Button';
+import { Button, ButtonVariant } from 'shared/ui/Button/Button';
 import { Input } from 'shared/ui/Input/Input';
 import cls from './LoginForm.module.scss';
 
@@ -14,7 +14,7 @@ export const LoginForm: FC<LoginFormProps> = ({ className }) => {
         <div className={cn(cls.LoginForm, {}, [className])}>
             <Input placeholder={t('login')} className={cls.input} />
             <Input placeholder={t('password')} className={cls.input} />
-            <Button className={cls.loginBtn}>
+            <Button variant={ButtonVariant.OUTLINE} className={cls.loginBtn}>
                 {t('Войти')}
             </Button>
         </div>
