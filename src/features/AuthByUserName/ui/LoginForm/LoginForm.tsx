@@ -15,7 +15,9 @@ interface LoginFormProps {
 export const LoginForm = memo(({ className }: LoginFormProps) => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
-    const { username, password } = useSelector(getLoginState);
+    const {
+        username, password, error, isLoading,
+    } = useSelector(getLoginState);
 
     const onChangeUsername = useCallback((value: string) => {
         dispatch(loginActions.setUsername(value));
@@ -31,6 +33,7 @@ export const LoginForm = memo(({ className }: LoginFormProps) => {
 
     return (
         <div className={cn(cls.LoginForm, {}, [className])}>
+            {error && <div>{error}</div>}
             <Input
                 placeholder={t('login')}
                 className={cls.input}
@@ -43,7 +46,12 @@ export const LoginForm = memo(({ className }: LoginFormProps) => {
                 onChange={onChangePassword}
                 value={password}
             />
-            <Button variant={ButtonVariant.OUTLINE} onClick={onLoginClick} className={cls.loginBtn}>
+            <Button
+                variant={ButtonVariant.OUTLINE}
+                onClick={onLoginClick}
+                className={cls.loginBtn}
+                disabled={isLoading}
+            >
                 {t('Войти')}
             </Button>
         </div>
