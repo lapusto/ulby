@@ -9,5 +9,9 @@
   "Войти": "Login",
   "an": "eng",
   "login": "Username",
-  "password": "Password"
+  "password": "Password",
+  "auth form": "Authorization",
+  "Wrong login or passwort": "Please enter correct login and password",
+  "Wrong login or password": "Please enter correct login and password",
+  "Logout": "Logout"
 }

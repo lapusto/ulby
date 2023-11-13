@@ -4,6 +4,7 @@ import { classNames as cn } from 'shared/lib/classNames/classNames';
 import { Button, ButtonVariant } from 'shared/ui/Button/Button';
 import { Input } from 'shared/ui/Input/Input';
 import { useDispatch, useSelector } from 'react-redux';
+import { TextStyle, Text } from 'shared/ui/Text/Text';
 import { loginActions } from '../../model/slice/loginSlice';
 import cls from './LoginForm.module.scss';
 import { getLoginState } from '../../model/selectors/getLoginState/getLoginState';
@@ -33,7 +34,8 @@ export const LoginForm = memo(({ className }: LoginFormProps) => {
 
     return (
         <div className={cn(cls.LoginForm, {}, [className])}>
-            {error && <div>{error}</div>}
+            <Text title={t('auth form')} />
+            {error && <Text style={TextStyle.ERROR} text={error} />}
             <Input
                 placeholder={t('login')}
                 className={cls.input}
