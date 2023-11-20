@@ -13,7 +13,7 @@ const MainPage = () => {
         <div>
             {t('main')}
             <Input value={value} onChange={onChange} placeholder="input" />
-            <Counter />
+            {/* <Counter /> */}
         </div>
     );
 };
