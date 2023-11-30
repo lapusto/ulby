@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, Suspense, useState } from 'react';
 import { classNames as cn } from 'shared/lib/classNames/classNames';
 import { ThemeSwitcher } from 'widgets/ThemeSwitcher';
 import { LangSwitcher } from 'widgets/LangSwitcher';
@@ -53,7 +53,10 @@ export const Sidebar: FC<SidebarProps> = ({ className }) => {
             </div>
             <div className={cls.switchers}>
                 <ThemeSwitcher />
-                <LangSwitcher className={cls.lang} />
+                <Suspense fallback="">
+                    <LangSwitcher className={cls.lang} />
+                </Suspense>
+
             </div>
         </div>
     );
