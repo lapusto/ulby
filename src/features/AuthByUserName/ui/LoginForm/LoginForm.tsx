@@ -13,7 +13,7 @@ import { loginByUsername } from '../../model/services/loginByUsername';
 interface LoginFormProps {
     className?: string;
 }
-export const LoginForm = memo(({ className }: LoginFormProps) => {
+const LoginForm = memo(({ className }: LoginFormProps) => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
     const {
@@ -59,3 +59,5 @@ export const LoginForm = memo(({ className }: LoginFormProps) => {
         </div>
     );
 });
+
+export default LoginForm;
