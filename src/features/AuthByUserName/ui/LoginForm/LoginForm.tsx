@@ -9,7 +9,7 @@ import { getLoginUsername } from 'features/AuthByUserName/model/selectors/getLog
 import { getLoginPassword } from 'features/AuthByUserName/model/selectors/getLoginPassword/getLoginPassword';
 import { getLoginIsLoading } from 'features/AuthByUserName/model/selectors/getLoginIsLoading/getLoginIsLoading';
 import { getLoginError } from 'features/AuthByUserName/model/selectors/getLoginError/getLoginError';
-import { DynamicMuduleLoader } from 'shared/lib/components/DynamicModuleLoader/DynamicMuduleLoader';
+import { DynamicMuduleLoader, ReducerList } from 'shared/lib/components/DynamicModuleLoader/DynamicMuduleLoader';
 import cls from './LoginForm.module.scss';
 import { loginActions, loginReducer } from '../../model/slice/loginSlice';
 import { loginByUsername } from '../../model/services/loginByUsername';
@@ -17,6 +17,10 @@ import { loginByUsername } from '../../model/services/loginByUsername';
 interface LoginFormProps {
     className?: string;
 }
+const initialReducers: ReducerList = {
+    loginForm: loginReducer,
+};
+
 const LoginForm = memo(({ className }: LoginFormProps) => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
@@ -39,7 +43,7 @@ const LoginForm = memo(({ className }: LoginFormProps) => {
     }, [dispatch, username, password]);
 
     return (
-        <DynamicMuduleLoader name="loginForm" reducer={loginReducer} removeAfterUnmount>
+        <DynamicMuduleLoader name="loginForm" reducers={initialReducers} removeAfterUnmount>
             <div className={cn(cls.LoginForm, {}, [className])}>
                 <Text title={t('auth form')} />
                 {error && <Text style={TextStyle.ERROR} text={error} />}

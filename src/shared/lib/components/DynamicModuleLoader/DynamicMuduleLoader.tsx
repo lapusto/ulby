@@ -4,20 +4,28 @@ import { StateSchemaKey } from 'app/providers/StoreProvider/config/StateSchema';
 import { FC, useEffect } from 'react';
 import { useDispatch, useStore } from 'react-redux';
 
+export type ReducerList = {
+    [name in StateSchemaKey]?: Reducer
+}
+
+type ReducerListEntry = [StateSchemaKey, Reducer]
+
 interface DynamicMuduleLoaderProps {
     name: StateSchemaKey;
-    reducer: Reducer;
+    reducers: ReducerList;
     removeAfterUnmount?: boolean
 }
 
 export const DynamicMuduleLoader: FC<DynamicMuduleLoaderProps> = ({
-    children, removeAfterUnmount, name, reducer,
+    children, removeAfterUnmount, name, reducers,
 }) => {
     const store = useStore() as ReduxStoreWithManager;
     const dispatch = useDispatch();
     useEffect(() => {
-        store.reducerManager.add(name, reducer);
-        dispatch({ type: 'init' });
+        Object.entries(reducers).forEach(([name, reducer]: ReducerListEntry) => {
+            store.reducerManager.add(name, reducer);
+            dispatch({ type: 'init' });
+        });
         return () => {
             if (removeAfterUnmount) {
                 store.reducerManager.remove(name);
