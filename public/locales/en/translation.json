@@ -13,5 +13,6 @@
   "auth form": "Authorization",
   "Wrong login or passwort": "Please enter correct login and password",
   "Wrong login or password": "Please enter correct login and password",
-  "Logout": "Logout"
+  "Logout": "Logout",
+  "PROFILE PAGE": "PROFILE PAGE"
 }
