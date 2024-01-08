@@ -1,4 +1,6 @@
-import { FC, Suspense, useState } from 'react';
+import {
+    Suspense, memo, useMemo, useState,
+} from 'react';
 import { classNames as cn } from 'shared/lib/classNames/classNames';
 import { ThemeSwitcher } from 'widgets/ThemeSwitcher';
 import { LangSwitcher } from 'widgets/LangSwitcher';
@@ -11,9 +13,15 @@ interface SidebarProps {
     className?: string;
 }
 
-export const Sidebar: FC<SidebarProps> = ({ className }) => {
+export const Sidebar = memo(({ className }: SidebarProps) => {
     const [collapsed, setCollapsed] = useState(false);
     const onToggle = () => setCollapsed((collapsed) => !collapsed);
+    const itemsList = useMemo(() => SidebarItemsList.map((item) => (
+        <SidebarItem
+            item={item}
+            collapsed={collapsed}
+        />
+    )), [collapsed]);
     return (
         <div
             data-testid="sidebar"
@@ -32,7 +40,7 @@ export const Sidebar: FC<SidebarProps> = ({ className }) => {
             </Button>
             <div className={cls.items}>
                 {
-                    SidebarItemsList.map((item) => <SidebarItem item={item} />)
+                    itemsList
                 }
             </div>
             <div className={cls.switchers}>
@@ -44,4 +52,4 @@ export const Sidebar: FC<SidebarProps> = ({ className }) => {
             </div>
         </div>
     );
-};
+});
