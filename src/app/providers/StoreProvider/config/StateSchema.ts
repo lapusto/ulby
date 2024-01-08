@@ -2,6 +2,7 @@ import {
     AnyAction, CombinedState, EnhancedStore, Reducer, ReducersMapObject,
 } from '@reduxjs/toolkit';
 import { CounterSchema } from 'entities/Counter';
+import { ProfileSchema } from 'entities/Profile';
 import { UserSchema } from 'entities/User';
 import { LoginSchema } from 'features/AuthByUserName';
 
@@ -9,7 +10,8 @@ export interface StateSchema {
     counter: CounterSchema;
     user: UserSchema;
     // Асинхронные редюсеры
-    loginForm?: LoginSchema
+    loginForm?: LoginSchema;
+    profile: ProfileSchema;
 }
 
 export type StateSchemaKey = keyof StateSchema;
