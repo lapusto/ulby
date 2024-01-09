@@ -1,4 +1,4 @@
-import { fetchProfileData, profileReducer } from 'entities/Profile';
+import { ProfileCard, fetchProfileData, profileReducer } from 'entities/Profile';
 import { FC, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { classNames as cn } from 'shared/lib/classNames/classNames';
@@ -14,7 +14,6 @@ const reducers: ReducerList = {
 };
 
 const ProfilePage: FC<ProfilePageProps> = ({ className }) => {
-    const { t } = useTranslation();
     const dispatch = useAppDispatch();
 
     useEffect(() => {
@@ -24,7 +23,7 @@ const ProfilePage: FC<ProfilePageProps> = ({ className }) => {
     return (
         <DynamicMuduleLoader removeAfterUnmount name="profile" reducers={reducers}>
             <div className={cn('', {}, [className])}>
-                {t('PROFILE PAGE')}
+                <ProfileCard />
             </div>
         </DynamicMuduleLoader>
 
