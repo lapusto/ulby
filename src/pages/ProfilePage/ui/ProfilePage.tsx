@@ -1,6 +1,9 @@
 import { ProfileCard, fetchProfileData, profileReducer } from 'entities/Profile';
+import { getProfileData } from 'entities/Profile/model/selectors/getProfileData/getProfileData';
+import { getProfileError } from 'entities/Profile/model/selectors/getProfileError/getProfileError';
+import { getProfileIsLoading } from 'entities/Profile/model/selectors/getProfileIsLoading/getProfileIsLoading';
 import { FC, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 import { classNames as cn } from 'shared/lib/classNames/classNames';
 import { DynamicMuduleLoader, ReducerList } from 'shared/lib/components/DynamicModuleLoader/DynamicMuduleLoader';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
@@ -20,10 +23,14 @@ const ProfilePage: FC<ProfilePageProps> = ({ className }) => {
         dispatch(fetchProfileData());
     }, [dispatch]);
 
+    const data = useSelector(getProfileData);
+    const error = useSelector(getProfileError);
+    const isLoading = useSelector(getProfileIsLoading);
+
     return (
         <DynamicMuduleLoader removeAfterUnmount name="profile" reducers={reducers}>
             <div className={cn('', {}, [className])}>
-                <ProfileCard />
+                <ProfileCard data={data} isLoading={isLoading} error={error} />
             </div>
         </DynamicMuduleLoader>
 
