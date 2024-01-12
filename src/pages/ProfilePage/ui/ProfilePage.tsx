@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import { classNames as cn } from 'shared/lib/classNames/classNames';
 import { DynamicMuduleLoader, ReducerList } from 'shared/lib/components/DynamicModuleLoader/DynamicMuduleLoader';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
+import { ProfilePageHeader } from './ProfilePageHeader/ProfilePageHeader';
 
 interface ProfilePageProps {
     className?: string;
@@ -30,6 +31,7 @@ const ProfilePage: FC<ProfilePageProps> = ({ className }) => {
     return (
         <DynamicMuduleLoader removeAfterUnmount name="profile" reducers={reducers}>
             <div className={cn('', {}, [className])}>
+                <ProfilePageHeader />
                 <ProfileCard data={data} isLoading={isLoading} error={error} />
             </div>
         </DynamicMuduleLoader>

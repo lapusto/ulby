@@ -2,5 +2,8 @@
   "profile": "Profile",
   "edit": "Edit",
   "lastname": "Last name",
-  "firstname": "First name"
+  "firstname": "First name",
+  "profile error": "Profile loading error",
+  "try to restart": "Try to restart page",
+  "cancel": "Cancel"
 }

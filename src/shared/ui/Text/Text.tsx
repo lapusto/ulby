@@ -8,21 +8,28 @@ export enum TextStyle {
     ERROR = 'error'
 }
 
+export enum TextAlign {
+    RIGHT = 'right',
+    LEFT = 'left',
+    CENTER = 'center'
+}
+
 interface TextProps {
     className?: string;
     title?: string;
     text?: string;
     style?: TextStyle;
+    align?: TextAlign
 }
 
 export const Text: FC<TextProps> = (
     {
-        className, text, title, style = TextStyle.PRIMARY,
+        className, text, title, style = TextStyle.PRIMARY, align = TextAlign.LEFT,
     },
 ) => {
     const { t } = useTranslation();
     return (
-        <div className={cn(cls.Text, { [cls[style]]: style }, [className])}>
+        <div className={cn(cls.Text, { [cls[style]]: style, [cls[align]]: align }, [className])}>
             {title && <p className={cls.title}>{title}</p>}
             {text && <p className={cls.text}>{text}</p>}
         </div>

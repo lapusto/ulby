@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { classNames, classNames as cn } from 'shared/lib/classNames/classNames';
-import { Text } from 'shared/ui/Text/Text';
+import { Text, TextAlign, TextStyle } from 'shared/ui/Text/Text';
 import { Button, ButtonVariant } from 'shared/ui/Button/Button';
 import { Input } from 'shared/ui/Input/Input';
 import { Profile } from 'entities/Profile/model/types/profile';
@@ -27,12 +27,21 @@ export const ProfileCard: FC<ProfileCardProps> = ({
         );
     }
 
+    if (error) {
+        return (
+            <div className={classNames(cls.ProfileCard, {}, [cls.error])}>
+                <Text
+                    align={TextAlign.CENTER}
+                    style={TextStyle.ERROR}
+                    title={t('profile error')}
+                    text={t('try to restart')}
+                />
+            </div>
+        );
+    }
+
     return (
         <div className={cn(cls.ProfileCard, {}, [className])}>
-            <div className={cls.header}>
-                <Text title={t('profile')} />
-                <Button className={cls.editBtn} variant={ButtonVariant.OUTLINE}>{t('edit')}</Button>
-            </div>
             <div className={cls.data}>
                 <Input
                     value={data?.first}
