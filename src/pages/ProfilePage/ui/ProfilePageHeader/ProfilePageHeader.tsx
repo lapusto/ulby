@@ -14,7 +14,7 @@ interface ProfilePageHeaderProps {
 }
 
 export const ProfilePageHeader: FC<ProfilePageHeaderProps> = ({ className }) => {
-    const { t } = useTranslation();
+    const { t } = useTranslation('profile');
     const readonly = useSelector(getProfileReadOnly);
     const dispatch = useAppDispatch();
     const onEdit = useCallback(() => {
@@ -23,6 +23,10 @@ export const ProfilePageHeader: FC<ProfilePageHeaderProps> = ({ className }) => 
 
     const onCancelEdit = useCallback(() => {
         dispatch(profileActions.cancelEdit());
+    }, [dispatch]);
+
+    const onSave = useCallback(() => {
+        dispatch(profileActions.updateProfile({}));
     }, [dispatch]);
 
     return (
@@ -40,13 +44,22 @@ export const ProfilePageHeader: FC<ProfilePageHeaderProps> = ({ className }) => 
                         </Button>
                     )
                     : (
-                        <Button
-                            className={cls.editBtn}
-                            variant={ButtonVariant.OUTLINE}
-                            onClick={onCancelEdit}
-                        >
-                            {t('cancel')}
-                        </Button>
+                        <>
+                            <Button
+                                className={cls.editBtn}
+                                variant={ButtonVariant.OUTLINE_RED}
+                                onClick={onCancelEdit}
+                            >
+                                {t('cancel')}
+                            </Button>
+                            <Button
+                                className={cls.saveBtn}
+                                variant={ButtonVariant.OUTLINE}
+                                onClick={onSave}
+                            >
+                                {t('save')}
+                            </Button>
+                        </>
                     )
 
             }

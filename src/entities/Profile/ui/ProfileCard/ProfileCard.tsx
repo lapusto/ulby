@@ -15,10 +15,12 @@ interface ProfileCardProps {
     readOnly?: boolean;
     onChangeLastname: (value?: string) => void;
     onChangeFirstname: (value?: string) => void;
+    onChangeAge: (value?: number) => void;
+    onChangeCity: (value?: string) => void;
 }
 
 export const ProfileCard: FC<ProfileCardProps> = ({
-    className, data, isLoading, error, readOnly, onChangeFirstname, onChangeLastname,
+    className, data, isLoading, error, readOnly, onChangeFirstname, onChangeAge, onChangeCity, onChangeLastname,
 }) => {
     const { t } = useTranslation('profile');
     if (isLoading) {
@@ -56,6 +58,20 @@ export const ProfileCard: FC<ProfileCardProps> = ({
                     placeholder={t('lastname')}
                     className={cls.input}
                     onChange={onChangeLastname}
+                    readOnly={readOnly}
+                />
+                <Input
+                    value={data?.age}
+                    placeholder={t('age')}
+                    className={cls.input}
+                    onChange={onChangeAge}
+                    readOnly={readOnly}
+                />
+                <Input
+                    value={data?.city}
+                    placeholder={t('city')}
+                    className={cls.input}
+                    onChange={onChangeCity}
                     readOnly={readOnly}
                 />
             </div>

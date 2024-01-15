@@ -5,5 +5,8 @@
   "firstname": "First name",
   "profile error": "Profile loading error",
   "try to restart": "Try to restart page",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "save": "Save",
+  "age": "Age",
+  "city": "City"
 }
