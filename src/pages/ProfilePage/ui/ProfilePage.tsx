@@ -36,7 +36,7 @@ const ProfilePage: FC<ProfilePageProps> = ({ className }) => {
     }, [dispatch]);
 
     const onChangeAge = useCallback((value?: number) => {
-        dispatch(profileActions.updateProfile({ age: value || 0 }));
+        dispatch(profileActions.updateProfile({ age: value || '' }));
     }, [dispatch]);
 
     const onChangeCity = useCallback((value?: string) => {
