@@ -2,7 +2,6 @@ import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { classNames, classNames as cn } from 'shared/lib/classNames/classNames';
 import { Text, TextAlign, TextStyle } from 'shared/ui/Text/Text';
-import { Button, ButtonVariant } from 'shared/ui/Button/Button';
 import { Input } from 'shared/ui/Input/Input';
 import { Profile } from 'entities/Profile/model/types/profile';
 import { Loader } from 'shared/ui/Loader/Loader';
@@ -13,10 +12,13 @@ interface ProfileCardProps {
     data?: Profile;
     isLoading?: boolean;
     error?: string;
+    readOnly?: boolean;
+    onChangeLastname: (value?: string) => void;
+    onChangeFirstname: (value?: string) => void;
 }
 
 export const ProfileCard: FC<ProfileCardProps> = ({
-    className, data, isLoading, error,
+    className, data, isLoading, error, readOnly, onChangeFirstname, onChangeLastname,
 }) => {
     const { t } = useTranslation('profile');
     if (isLoading) {
@@ -39,7 +41,6 @@ export const ProfileCard: FC<ProfileCardProps> = ({
             </div>
         );
     }
-
     return (
         <div className={cn(cls.ProfileCard, {}, [className])}>
             <div className={cls.data}>
@@ -47,11 +48,15 @@ export const ProfileCard: FC<ProfileCardProps> = ({
                     value={data?.first}
                     placeholder={t('firstname')}
                     className={cls.input}
+                    onChange={onChangeFirstname}
+                    readOnly={readOnly}
                 />
                 <Input
                     value={data?.lastname}
                     placeholder={t('lastname')}
                     className={cls.input}
+                    onChange={onChangeLastname}
+                    readOnly={readOnly}
                 />
             </div>
         </div>

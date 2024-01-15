@@ -1,12 +1,15 @@
-import { ProfileCard, fetchProfileData, profileReducer } from 'entities/Profile';
-import { getProfileData } from 'entities/Profile/model/selectors/getProfileData/getProfileData';
+import {
+    ProfileCard, fetchProfileData, profileActions, profileReducer,
+} from 'entities/Profile';
 import { getProfileError } from 'entities/Profile/model/selectors/getProfileError/getProfileError';
 import { getProfileIsLoading } from 'entities/Profile/model/selectors/getProfileIsLoading/getProfileIsLoading';
-import { FC, useEffect } from 'react';
+import { FC, useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { classNames as cn } from 'shared/lib/classNames/classNames';
 import { DynamicMuduleLoader, ReducerList } from 'shared/lib/components/DynamicModuleLoader/DynamicMuduleLoader';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
+import { getProfileReadOnly } from 'entities/Profile/model/selectors/getProfileReadOnly/getProfileReadOnly';
+import { getProfileForm } from 'entities/Profile/model/selectors/getProfileForm/getProfileForm';
 import { ProfilePageHeader } from './ProfilePageHeader/ProfilePageHeader';
 
 interface ProfilePageProps {
@@ -24,15 +27,31 @@ const ProfilePage: FC<ProfilePageProps> = ({ className }) => {
         dispatch(fetchProfileData());
     }, [dispatch]);
 
-    const data = useSelector(getProfileData);
+    const onChangeFirstname = useCallback((value?: string) => {
+        dispatch(profileActions.updateProfile({ first: value || '' }));
+    }, [dispatch]);
+
+    const onChangeLastname = useCallback((value?: string) => {
+        dispatch(profileActions.updateProfile({ lastname: value || '' }));
+    }, [dispatch]);
+
+    const formData = useSelector(getProfileForm);
     const error = useSelector(getProfileError);
     const isLoading = useSelector(getProfileIsLoading);
+    const readOnly = useSelector(getProfileReadOnly);
 
     return (
         <DynamicMuduleLoader removeAfterUnmount name="profile" reducers={reducers}>
             <div className={cn('', {}, [className])}>
                 <ProfilePageHeader />
-                <ProfileCard data={data} isLoading={isLoading} error={error} />
+                <ProfileCard
+                    data={formData}
+                    isLoading={isLoading}
+                    error={error}
+                    onChangeFirstname={onChangeFirstname}
+                    onChangeLastname={onChangeLastname}
+                    readOnly={readOnly}
+                />
             </div>
         </DynamicMuduleLoader>
 
