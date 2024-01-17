@@ -43,6 +43,14 @@ const ProfilePage: FC<ProfilePageProps> = ({ className }) => {
         dispatch(profileActions.updateProfile({ city: value || '' }));
     }, [dispatch]);
 
+    const onChangeUsername = useCallback((value?: string) => {
+        dispatch(profileActions.updateProfile({ username: value || '' }));
+    }, [dispatch]);
+
+    const onChangeAvatar = useCallback((value?: string) => {
+        dispatch(profileActions.updateProfile({ avatar: value || '' }));
+    }, [dispatch]);
+
     const formData = useSelector(getProfileForm);
     const error = useSelector(getProfileError);
     const isLoading = useSelector(getProfileIsLoading);
@@ -60,6 +68,8 @@ const ProfilePage: FC<ProfilePageProps> = ({ className }) => {
                     onChangeLastname={onChangeLastname}
                     onChangeAge={onChangeAge}
                     onChangeCity={onChangeCity}
+                    onChangeAvatar={onChangeAvatar}
+                    onChangeUsername={onChangeUsername}
                     readOnly={readOnly}
                 />
             </div>
