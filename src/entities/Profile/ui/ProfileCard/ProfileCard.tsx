@@ -5,6 +5,9 @@ import { Text, TextAlign, TextStyle } from 'shared/ui/Text/Text';
 import { Input } from 'shared/ui/Input/Input';
 import { Profile } from 'entities/Profile/model/types/profile';
 import { Loader } from 'shared/ui/Loader/Loader';
+import { Avatar } from 'shared/ui/Avatar/Avatar';
+import { Select } from 'shared/ui/Select/Select';
+import { Currency } from 'shared/const/common';
 import cls from './ProfileCard.module.scss';
 
 interface ProfileCardProps {
@@ -59,7 +62,11 @@ export const ProfileCard: FC<ProfileCardProps> = ({
         <div className={cn(cls.ProfileCard, {}, [className])}>
             <div className={cls.data}>
                 {
-                    data.avatar && <img src={data?.avatar} alt="avatar" />
+                    data.avatar && (
+                        <div className={cls.avatarWrapper}>
+                            <Avatar src={data?.avatar} />
+                        </div>
+                    )
                 }
                 <Input
                     value={data?.first}
@@ -103,6 +110,15 @@ export const ProfileCard: FC<ProfileCardProps> = ({
                     onChange={onChangeAvatar}
                     readOnly={readOnly}
                 />
+                <Select
+                    label="Укажите валюту"
+                    options={[
+                        { value: Currency.BYN, content: Currency.BYN },
+                        { value: Currency.USD, content: Currency.USD },
+                        { value: Currency.EUR, content: Currency.EUR },
+                    ]}
+                />
+
             </div>
         </div>
     );
