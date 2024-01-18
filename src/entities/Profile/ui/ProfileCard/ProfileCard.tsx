@@ -59,7 +59,7 @@ export const ProfileCard: FC<ProfileCardProps> = ({
         );
     }
     return (
-        <div className={cn(cls.ProfileCard, {}, [className])}>
+        <div className={cn(cls.ProfileCard, { [cls.editing]: !readOnly }, [className])}>
             <div className={cls.data}>
                 {
                     data.avatar && (

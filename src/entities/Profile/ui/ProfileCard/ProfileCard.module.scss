@@ -19,5 +19,8 @@
   display: flex;
   width: 100%;
   justify-content: center;
+}
 
+.editing {
+  border: 2px solid var(--inverted-primary-color);
 }
