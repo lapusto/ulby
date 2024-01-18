@@ -6,8 +6,8 @@ import { Input } from 'shared/ui/Input/Input';
 import { Profile } from 'entities/Profile/model/types/profile';
 import { Loader } from 'shared/ui/Loader/Loader';
 import { Avatar } from 'shared/ui/Avatar/Avatar';
-import { Select } from 'shared/ui/Select/Select';
-import { Currency } from 'shared/const/common';
+import { Currency, CurrencySelect } from 'entities/Currency';
+import { Country, CountrySelect } from 'entities/Country';
 import cls from './ProfileCard.module.scss';
 
 interface ProfileCardProps {
@@ -22,6 +22,8 @@ interface ProfileCardProps {
     onChangeCity?: (value?: string) => void;
     onChangeUsername?: (value?: string) => void;
     onChangeAvatar?: (value?: string) => void;
+    onChangeCurrency?: (currency?: Currency) => void;
+    onChangeCountry?: (country?: Country) => void;
 }
 
 export const ProfileCard: FC<ProfileCardProps> = ({
@@ -36,6 +38,8 @@ export const ProfileCard: FC<ProfileCardProps> = ({
     onChangeAvatar,
     onChangeUsername,
     onChangeLastname,
+    onChangeCountry,
+    onChangeCurrency,
 }) => {
     const { t } = useTranslation('profile');
     if (isLoading) {
@@ -110,15 +114,18 @@ export const ProfileCard: FC<ProfileCardProps> = ({
                     onChange={onChangeAvatar}
                     readOnly={readOnly}
                 />
-                <Select
-                    label="Укажите валюту"
-                    options={[
-                        { value: Currency.BYN, content: Currency.BYN },
-                        { value: Currency.USD, content: Currency.USD },
-                        { value: Currency.EUR, content: Currency.EUR },
-                    ]}
+                <CurrencySelect
+                    className={cls.input}
+                    value={data?.currency}
+                    onChange={onChangeCurrency}
+                    readonly={readOnly}
                 />
-
+                <CountrySelect
+                    className={cls.input}
+                    value={data?.country}
+                    onChange={onChangeCountry}
+                    readonly={readOnly}
+                />
             </div>
         </div>
     );
