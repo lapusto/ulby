@@ -12,6 +12,10 @@ import { getProfileReadOnly } from 'entities/Profile/model/selectors/getProfileR
 import { getProfileForm } from 'entities/Profile/model/selectors/getProfileForm/getProfileForm';
 import { Currency } from 'entities/Currency';
 import { Country } from 'entities/Country';
+import {
+    getProfileValidateError,
+} from 'entities/Profile/model/selectors/getProfileValidateError/getProfileValidateError';
+import { Text, TextStyle } from 'shared/ui/Text/Text';
 import { ProfilePageHeader } from './ProfilePageHeader/ProfilePageHeader';
 
 interface ProfilePageProps {
@@ -65,11 +69,17 @@ const ProfilePage: FC<ProfilePageProps> = ({ className }) => {
     const error = useSelector(getProfileError);
     const isLoading = useSelector(getProfileIsLoading);
     const readOnly = useSelector(getProfileReadOnly);
+    const validateErrors = useSelector(getProfileValidateError);
 
     return (
         <DynamicMuduleLoader removeAfterUnmount name="profile" reducers={reducers}>
             <div className={cn('', {}, [className])}>
                 <ProfilePageHeader />
+                {
+                    validateErrors?.length && validateErrors.map((err) => (
+                        <Text key={err} style={TextStyle.ERROR} text={err} />
+                    ))
+                }
                 <ProfileCard
                     data={formData}
                     isLoading={isLoading}
