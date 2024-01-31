@@ -5,6 +5,7 @@ import { fetchArticleById } from 'entities/Article/model/services/fetchArticleBy
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { useSelector } from 'react-redux';
 import { Text, TextAlign, TextStyle } from 'shared/ui/Text/Text';
+import { Skeleton } from 'shared/ui/Skeleton/Skeleton';
 import {
     getArticleDetailsData,
     getArticleDetailsError,
@@ -37,7 +38,11 @@ export const ArticleDetails: FC<ArticleDetailsProps> = ({ className, id }) => {
     if (isLoading) {
         content = (
             <div>
-                Loading...
+                <Skeleton className={cls.avatar} width={200} height={200} border="50%" />
+                <Skeleton className={cls.title} width={300} height={32} />
+                <Skeleton className={cls.skeleton} width={600} height={24} />
+                <Skeleton className={cls.skeleton} width="100%" height={200} />
+                <Skeleton className={cls.skeleton} width="100%" height={200} />
             </div>
         );
     } else if (error) {
