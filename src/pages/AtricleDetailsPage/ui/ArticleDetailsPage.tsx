@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import { useTranslation } from 'react-i18next';
 import { classNames as cn } from 'shared/lib/classNames/classNames';
 import { ArticleDetails } from 'entities/Article';
+import { useParams } from 'react-router-dom';
 import cls from './ArticleDetailsPage.module.scss';
 
 interface ArticleDetailsPageProps {
@@ -9,10 +9,17 @@ interface ArticleDetailsPageProps {
 }
 
 const ArticleDetailsPage: FC<ArticleDetailsPageProps> = ({ className }) => {
-    const { t } = useTranslation();
+    const { id } = useParams<{ id: string }>();
+    if (!id) {
+        return (
+            <div className={cn(cls.ArticleDetailsPage, {}, [className])}>
+                Статья не найдена
+            </div>
+        );
+    }
     return (
         <div className={cn(cls.ArticleDetailsPage, {}, [className])}>
-            <ArticleDetails />
+            <ArticleDetails id={id} />
         </div>
     );
 };
