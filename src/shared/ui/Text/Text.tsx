@@ -14,22 +14,28 @@ export enum TextAlign {
     CENTER = 'center'
 }
 
+export enum TextSize {
+    M = 'size_m',
+    L = 'size_l',
+}
+
 interface TextProps {
     className?: string;
     title?: string;
     text?: string;
     style?: TextStyle;
-    align?: TextAlign
+    align?: TextAlign;
+    size?: TextSize
 }
 
 export const Text: FC<TextProps> = (
     {
-        className, text, title, style = TextStyle.PRIMARY, align = TextAlign.LEFT,
+        className, text, title, style = TextStyle.PRIMARY, align = TextAlign.LEFT, size = TextSize.M,
     },
 ) => {
     const { t } = useTranslation();
     return (
-        <div className={cn(cls.Text, { [cls[style]]: style, [cls[align]]: align }, [className])}>
+        <div className={cn(cls.Text, { [cls[style]]: style, [cls[align]]: align, [cls[size]]: size }, [className])}>
             {title && <p className={cls.title}>{title}</p>}
             {text && <p className={cls.text}>{text}</p>}
         </div>

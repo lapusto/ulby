@@ -16,9 +16,16 @@
   margin-top: 20px;
 }
 
-.atricleInfo {
+.articleInfo {
   display: flex;
+  align-items: center;
+
+  .icon {
+    margin-right: 8px;
+  }
 }
+
+
 
 .skeleton {
     margin-top: 15px;
