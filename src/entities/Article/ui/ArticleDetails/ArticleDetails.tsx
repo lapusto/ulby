@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC, useCallback, useEffect } from 'react';
 import { classNames as cn } from 'shared/lib/classNames/classNames';
 import { DynamicMuduleLoader, ReducerList } from 'shared/lib/components/DynamicModuleLoader/DynamicMuduleLoader';
 import { fetchArticleById } from 'entities/Article/model/services/fetchArticleById/fetchArticleById';
@@ -19,6 +19,10 @@ import {
 } from '../../model/selectors/articleDetails';
 import { articleDetailsReducer } from '../../model/slice/articleDetailsSlice';
 import cls from './ArticleDetails.module.scss';
+import { ArticleBlock, ArticleBlockType } from '../../model/types/article';
+import { ArticleCodeBlockComp } from '../ArticleCodeBlockCopm/ArticleCodeBlockComp';
+import { ArticleImageBlockComp } from '../ArticleImageBlockComp/ArticleImageBlockComp';
+import { ArticleTextBlockComp } from '../ArticleTextBlockComp/ArticleTextBlockComp';
 
 interface ArticleDetailsProps {
     className?: string;
@@ -34,6 +38,19 @@ export const ArticleDetails: FC<ArticleDetailsProps> = ({ className, id }) => {
     const isLoading = useSelector(getArticleDetailsLoading);
     const error = useSelector(getArticleDetailsError);
     const article = useSelector(getArticleDetailsData);
+
+    const renderBlock = useCallback((block: ArticleBlock) => {
+        switch (block.type) {
+        case ArticleBlockType.CODE:
+            return <ArticleCodeBlockComp className={cls.block} block={block} />;
+        case ArticleBlockType.IMAGE:
+            return <ArticleImageBlockComp className={cls.block} block={block} />;
+        case ArticleBlockType.TEXT:
+            return <ArticleTextBlockComp className={cls.block} block={block} />;
+        default:
+            return null;
+        }
+    }, []);
 
     useEffect(() => {
         dispatch(fetchArticleById(id));
@@ -70,6 +87,9 @@ export const ArticleDetails: FC<ArticleDetailsProps> = ({ className, id }) => {
                     <Icon Svg={CalendarIcon} className={cls.icon} />
                     <Text text={article?.createdAt} />
                 </div>
+                {
+                    article?.blocks.map(renderBlock)
+                }
             </>
         );
     }
