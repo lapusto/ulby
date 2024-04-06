@@ -23,22 +23,9 @@ const ArticleDetailsPage: FC<ArticleDetailsPageProps> = ({ className }) => {
         <div className={cn(cls.ArticleDetailsPage, {}, [className])}>
             <ArticleDetails id={id} />
             <Text title="Комментарии" className={cls.commentTitle} />
-            <CommentList comments={[
-                {
-                    id: '1',
-                    text: 'Отличная статья',
-                    user: {
-                        id: '1',
-                        username: 'User',
-                        avatar: 'https://static.sobaka.ru/images/image/00/80/54/85/_normal.jpg?v=1485945088',
-                    },
-                },
-                {
-                    id: '2',
-                    text: 'Спасибо за информацию',
-                    user: { id: '2', username: 'User 2' },
-                },
-            ]}
+            <CommentList
+                comments={[]}
+                isLoading
             />
         </div>
     );
