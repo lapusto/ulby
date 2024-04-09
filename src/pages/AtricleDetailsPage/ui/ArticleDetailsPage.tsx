@@ -1,14 +1,15 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { classNames as cn } from 'shared/lib/classNames/classNames';
 import { ArticleDetails } from 'entities/Article';
 import { useParams } from 'react-router-dom';
 import { Text } from 'shared/ui/Text/Text';
 import { CommentList } from 'entities/Comment';
 import { DynamicMuduleLoader, ReducerList } from 'shared/lib/components/DynamicModuleLoader/DynamicMuduleLoader';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import cls from './ArticleDetailsPage.module.scss';
 import { articleDetailsCommentsReducer, getArticleComments } from '../model/slices/articleDetailsCommentsSlice';
 import { getArticleCommentsIsLoading } from '../model/selectors/comments';
+import { fetchCommentsByArticleId } from '../model/services/fetchCommentsByArticleId/fetchCommentsByArticleId';
 
 interface ArticleDetailsPageProps {
     className?: string;
@@ -22,6 +23,13 @@ const ArticleDetailsPage: FC<ArticleDetailsPageProps> = ({ className }) => {
     const { id } = useParams<{ id: string }>();
     const comments = useSelector(getArticleComments.selectAll);
     const commentsIsLoading = useSelector(getArticleCommentsIsLoading);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(fetchCommentsByArticleId(id));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
     if (!id) {
         return (
             <div className={cn(cls.ArticleDetailsPage, {}, [className])}>
