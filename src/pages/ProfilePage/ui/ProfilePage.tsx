@@ -16,6 +16,7 @@ import {
     getProfileValidateError,
 } from 'entities/Profile/model/selectors/getProfileValidateError/getProfileValidateError';
 import { Text, TextStyle } from 'shared/ui/Text/Text';
+import { useParams } from 'react-router-dom';
 import { ProfilePageHeader } from './ProfilePageHeader/ProfilePageHeader';
 
 interface ProfilePageProps {
@@ -28,10 +29,13 @@ const reducers: ReducerList = {
 
 const ProfilePage: FC<ProfilePageProps> = ({ className }) => {
     const dispatch = useAppDispatch();
+    const { id } = useParams<{ id: string }>();
 
     useEffect(() => {
-        dispatch(fetchProfileData());
-    }, [dispatch]);
+        if (id) {
+            dispatch(fetchProfileData(id));
+        }
+    }, [dispatch, id]);
 
     const onChangeFirstname = useCallback((value?: string) => {
         dispatch(profileActions.updateProfile({ first: value || '' }));

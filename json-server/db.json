@@ -118,14 +118,28 @@
       "avatar": ""
     }
   ],
-  "profile": {
-    "first": "jgh",
-    "lastname": "asf",
-    "age": 465,
-    "currency": "RUB",
-    "country": "Belarus",
-    "city": "Moscow",
-    "username": "admin213",
-    "avatar": "https://icons.iconarchive.com/icons/webalys/kameleon.pics/512/Hacker-icon.png"
-  }
+  "profile": [
+    {
+      "id": "1",
+      "first": "jgh",
+      "lastname": "asf",
+      "age": 465,
+      "currency": "RUB",
+      "country": "Belarus",
+      "city": "Moscow",
+      "username": "admin213",
+      "avatar": "https://icons.iconarchive.com/icons/webalys/kameleon.pics/512/Hacker-icon.png"
+    },
+    {
+      "id": "2",
+      "first": "ul",
+      "lastname": "bi",
+      "age": 30,
+      "currency": "BYN",
+      "country": "Belarus",
+      "city": "Minsk",
+      "username": "ulbi",
+      "avatar": "https://teknotower.com/wp-content/uploads/2020/11/js.png"
+    }
+  ]
 }
