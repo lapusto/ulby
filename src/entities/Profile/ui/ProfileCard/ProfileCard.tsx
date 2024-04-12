@@ -66,7 +66,7 @@ export const ProfileCard: FC<ProfileCardProps> = ({
         <div className={cn(cls.ProfileCard, { [cls.editing]: !readOnly }, [className])}>
             <div className={cls.data}>
                 {
-                    data.avatar && (
+                    data?.avatar && (
                         <div className={cls.avatarWrapper}>
                             <Avatar src={data?.avatar} />
                         </div>

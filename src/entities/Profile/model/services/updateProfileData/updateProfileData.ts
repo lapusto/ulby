@@ -5,9 +5,9 @@ import { validateProfileData } from '../validateProfileData/validateProfileData'
 import { Profile, ValidateProfileError } from '../../types/profile';
 import { getProfileForm } from '../../selectors/getProfileForm/getProfileForm';
 
-export const updateProfileData = createAsyncThunk<Profile, void, ThunkConfig<ValidateProfileError[]>>(
+export const updateProfileData = createAsyncThunk<Profile, string, ThunkConfig<ValidateProfileError[]>>(
     'profile/updateProfileData',
-    async (_, { extra, rejectWithValue, getState }) => {
+    async (profileId, { extra, rejectWithValue, getState }) => {
         const formData = getProfileForm(getState());
         const errors = validateProfileData(formData);
 
@@ -15,7 +15,10 @@ export const updateProfileData = createAsyncThunk<Profile, void, ThunkConfig<Val
             return rejectWithValue(errors);
         }
         try {
-            const response = await extra.api.put<Profile>('/profile', formData);
+            const response = await extra.api.put<Profile>(
+                `/profile/${profileId}`,
+                formData,
+            );
             return response.data;
         } catch (e) {
             return rejectWithValue(i18n.t('Wrong login or password'));
