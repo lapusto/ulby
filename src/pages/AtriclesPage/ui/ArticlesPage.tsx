@@ -1,7 +1,7 @@
 import { FC, memo } from 'react';
-import { useTranslation } from 'react-i18next';
 import { classNames as cn } from 'shared/lib/classNames/classNames';
-import { Article, AtricleList } from 'entities/Article';
+import { ArticleView } from 'entities/Article';
+import { ArticleList } from 'entities/Article/ui/ArticleList/ArticleList';
 import cls from './ArticlesPage.module.scss';
 
 interface ArticlesPageProps {
@@ -10,7 +10,7 @@ interface ArticlesPageProps {
 
 const ArticlesPage: FC<ArticlesPageProps> = ({ className }) => (
     <div className={cn(cls.ArticlesPage, {}, [className])}>
-        <AtricleList articles={[]} />
+        <ArticleList view={ArticleView.SMALL} articles={[]} />
     </div>
 );
 
