@@ -4,6 +4,7 @@ import { userReducer } from 'entities/User';
 import { profileReducer } from 'entities/Profile';
 import { $api } from 'shared/api/api';
 import { NavigateOptions, To } from 'react-router-dom';
+import { articlesPageReducer } from 'pages/AtriclesPage/model/slices/ArticlePageSlice';
 import { StateSchema } from './StateSchema';
 import { createReducerManager } from './reducerManager';
 
@@ -15,6 +16,7 @@ export function createReduxStore(
         counter: counterReducer,
         user: userReducer,
         profile: profileReducer,
+        articlesPage: articlesPageReducer,
     };
 
     const reducerManager = createReducerManager(RootReducers);
