@@ -12,10 +12,8 @@ import { Page } from 'shared/ui/Page/Page';
 import cls from './ArticlesPage.module.scss';
 import { articlesPageActions, articlesPageReducer, getArticles } from '../model/slices/ArticlePageSlice';
 import { fetchArticlesList } from '../model/services/fetchArticlesList/fetchArticlesList';
-import {
-    getArticlesPageLoading,
-    getArticlesPageView,
-} from '../model/selectors/articlesPageSelectors';
+import { fetchNextArticlesPage } from '../model/services/fetchNextArticlesPage/fetchNextArticlesPage';
+import { getArticlesPageLoading, getArticlesPageView } from '../model/selectors/articlesPageSelectors';
 
 interface ArticlesPageProps {
     className?: string;
@@ -34,17 +32,20 @@ const ArticlesPage: FC<ArticlesPageProps> = ({ className }) => {
         dispatch(articlesPageActions.setView(view));
     }, [dispatch]);
 
+    const onLoadNextPart = useCallback(() => {
+        dispatch(fetchNextArticlesPage());
+    }, [dispatch]);
+
     useEffect(() => {
         dispatch(articlesPageActions.initState());
-        dispatch(
-            fetchArticlesList({
-                page: 1,
-            }),
-        );
-    }, [dispatch]);
+        dispatch(fetchArticlesList({
+            page: 1,
+        }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
     return (
         <DynamicMuduleLoader reducers={reducers}>
-            <Page className={cn(cls.ArticlesPage, {}, [className])}>
+            <Page onScrollEnd={onLoadNextPart} className={cn(cls.ArticlesPage, {}, [className])}>
                 <ArticlesViewSelector currentView={articlesView} onViewClick={onChangeView} />
                 <ArticleList view={articlesView} articles={articles} isLoading={isLoading} />
             </Page>
