@@ -8,6 +8,7 @@ import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { useSelector } from 'react-redux';
 import { ArticlesViewSelector } from 'features/selectArticlesView/ArticlesViewSelector';
 import { ArticleView } from 'entities/Article';
+import { Page } from 'shared/ui/Page/Page';
 import cls from './ArticlesPage.module.scss';
 import { articlesPageActions, articlesPageReducer, getArticles } from '../model/slices/ArticlePageSlice';
 import { fetchArticlesList } from '../model/services/fetchArticlesList/fetchArticlesList';
@@ -34,17 +35,19 @@ const ArticlesPage: FC<ArticlesPageProps> = ({ className }) => {
     }, [dispatch]);
 
     useEffect(() => {
-        dispatch(
-            fetchArticlesList(),
-        );
         dispatch(articlesPageActions.initState());
+        dispatch(
+            fetchArticlesList({
+                page: 1,
+            }),
+        );
     }, [dispatch]);
     return (
         <DynamicMuduleLoader reducers={reducers}>
-            <div className={cn(cls.ArticlesPage, {}, [className])}>
+            <Page className={cn(cls.ArticlesPage, {}, [className])}>
                 <ArticlesViewSelector currentView={articlesView} onViewClick={onChangeView} />
                 <ArticleList view={articlesView} articles={articles} isLoading={isLoading} />
-            </div>
+            </Page>
         </DynamicMuduleLoader>
     );
 };

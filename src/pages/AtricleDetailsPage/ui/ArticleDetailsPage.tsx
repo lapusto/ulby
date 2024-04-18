@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AddCommentForm } from 'features/addCommentForm';
 import { Button, ButtonVariant } from 'shared/ui/Button/Button';
 import { RoutePath } from 'shared/config/routeConfig/routeConfig';
+import { Page } from 'shared/ui/Page/Page';
 import cls from './ArticleDetailsPage.module.scss';
 import { articleDetailsCommentsReducer, getArticleComments } from '../model/slices/articleDetailsCommentsSlice';
 import { getArticleCommentsIsLoading } from '../model/selectors/comments';
@@ -44,14 +45,14 @@ const ArticleDetailsPage: FC<ArticleDetailsPageProps> = ({ className }) => {
 
     if (!id) {
         return (
-            <div className={cn(cls.ArticleDetailsPage, {}, [className])}>
+            <Page className={cn(cls.ArticleDetailsPage, {}, [className])}>
                 Статья не найдена
-            </div>
+            </Page>
         );
     }
     return (
         <DynamicMuduleLoader reducers={reducers} removeAfterUnmount>
-            <div className={cn(cls.ArticleDetailsPage, {}, [className])}>
+            <Page className={cn(cls.ArticleDetailsPage, {}, [className])}>
                 <Button
                     variant={ButtonVariant.OUTLINE}
                     onClick={onBackToList}
@@ -65,7 +66,7 @@ const ArticleDetailsPage: FC<ArticleDetailsPageProps> = ({ className }) => {
                     comments={comments}
                     isLoading={commentsIsLoading}
                 />
-            </div>
+            </Page>
         </DynamicMuduleLoader>
     );
 };

@@ -17,6 +17,7 @@ import {
 } from 'entities/Profile/model/selectors/getProfileValidateError/getProfileValidateError';
 import { Text, TextStyle } from 'shared/ui/Text/Text';
 import { useParams } from 'react-router-dom';
+import { Page } from 'shared/ui/Page/Page';
 import { ProfilePageHeader } from './ProfilePageHeader/ProfilePageHeader';
 
 interface ProfilePageProps {
@@ -77,7 +78,7 @@ const ProfilePage: FC<ProfilePageProps> = ({ className }) => {
 
     return (
         <DynamicMuduleLoader removeAfterUnmount name="profile" reducers={reducers}>
-            <div className={cn('', {}, [className])}>
+            <Page className={cn('', {}, [className])}>
                 <ProfilePageHeader />
                 {
                     validateErrors?.length && validateErrors.map((err) => (
@@ -98,7 +99,7 @@ const ProfilePage: FC<ProfilePageProps> = ({ className }) => {
                     onChangeCountry={onChangeCountry}
                     readOnly={readOnly}
                 />
-            </div>
+            </Page>
         </DynamicMuduleLoader>
 
     );
