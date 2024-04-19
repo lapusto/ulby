@@ -34,6 +34,7 @@ export const ArticlesViewSelector: FC<ArticlesViewSelectorProps> = ({ className,
                     <Button
                         onClick={onClick(v.view)}
                         variant={ButtonVariant.CLEAR}
+                        key={v.view}
                     >
                         <Icon Svg={v.icon} className={cn('', { [cls.notActive]: v.view !== currentView })} />
                     </Button>

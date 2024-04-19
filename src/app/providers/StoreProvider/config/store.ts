@@ -3,14 +3,12 @@ import { counterReducer } from 'entities/Counter';
 import { userReducer } from 'entities/User';
 import { profileReducer } from 'entities/Profile';
 import { $api } from 'shared/api/api';
-import { NavigateOptions, To } from 'react-router-dom';
-import { articlesPageReducer } from 'pages/AtriclesPage/model/slices/ArticlePageSlice';
+import { articlesPageReducer } from 'pages/AtriclesPage/model/slices/articlePageSlice';
 import { StateSchema } from './StateSchema';
 import { createReducerManager } from './reducerManager';
 
 export function createReduxStore(
     initialState?: StateSchema,
-    navigate?: (to: To, options?: NavigateOptions) => void,
 ) {
     const RootReducers: ReducersMapObject<StateSchema> = {
         counter: counterReducer,
@@ -29,7 +27,6 @@ export function createReduxStore(
             thunk: {
                 extraArgument: {
                     api: $api,
-                    navigate,
                 },
             },
         }),

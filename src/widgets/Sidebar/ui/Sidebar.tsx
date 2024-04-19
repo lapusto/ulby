@@ -19,11 +19,10 @@ export const Sidebar = memo(({ className }: SidebarProps) => {
     const sidebarItemsList = useSelector(getSidebarItems);
     const onToggle = () => setCollapsed((collapsed) => !collapsed);
     const itemsList = useMemo(() => sidebarItemsList.map((item) => (
-        <Suspense fallback="">
+        <Suspense fallback="" key={item.path}>
             <SidebarItem
                 item={item}
                 collapsed={collapsed}
-                key={item.path}
             />
         </Suspense>
     )), [collapsed, sidebarItemsList]);

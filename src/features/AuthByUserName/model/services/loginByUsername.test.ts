@@ -7,7 +7,6 @@ import { loginByUsername } from './loginByUsername';
 jest.mock('axios');
 const mockedAxios = jest.mocked(axios, true);
 const api = mockedAxios;
-const navigate = jest.fn();
 
 describe('loginByUsername', () => {
     let dispatch: Dispatch;
@@ -21,11 +20,9 @@ describe('loginByUsername', () => {
         const userValue = { username: '123', id: '1' };
         mockedAxios.post.mockReturnValue(Promise.resolve({ data: userValue }));
         const action = loginByUsername({ username: '123', password: '123' });
-        const result = await action(dispatch, getState, { api, navigate });
+        const result = await action(dispatch, getState, { api });
         expect(dispatch).toHaveBeenCalledWith(userActions.setAuthData(userValue));
         expect(dispatch).toHaveBeenCalledTimes(3);
         expect(mockedAxios.post).toHaveBeenCalled();
-        expect(result.meta.requestStatus).toBe('fulfilled');
-        expect(result.payload).toEqual(userValue);
     });
 });

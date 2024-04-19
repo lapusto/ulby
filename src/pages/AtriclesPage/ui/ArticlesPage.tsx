@@ -10,10 +10,12 @@ import { ArticlesViewSelector } from 'features/selectArticlesView/ArticlesViewSe
 import { ArticleView } from 'entities/Article';
 import { Page } from 'shared/ui/Page/Page';
 import cls from './ArticlesPage.module.scss';
-import { articlesPageActions, articlesPageReducer, getArticles } from '../model/slices/ArticlePageSlice';
-import { fetchArticlesList } from '../model/services/fetchArticlesList/fetchArticlesList';
+import { articlesPageActions, articlesPageReducer, getArticles } from '../model/slices/articlePageSlice';
 import { fetchNextArticlesPage } from '../model/services/fetchNextArticlesPage/fetchNextArticlesPage';
-import { getArticlesPageLoading, getArticlesPageView } from '../model/selectors/articlesPageSelectors';
+import {
+    getArticlesPageLoading, getArticlesPageView,
+} from '../model/selectors/articlesPageSelectors';
+import { initArticlesPage } from '../model/services/initArticlesPage.tsx/initArticlesPage';
 
 interface ArticlesPageProps {
     className?: string;
@@ -37,14 +39,11 @@ const ArticlesPage: FC<ArticlesPageProps> = ({ className }) => {
     }, [dispatch]);
 
     useEffect(() => {
-        dispatch(articlesPageActions.initState());
-        dispatch(fetchArticlesList({
-            page: 1,
-        }));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        dispatch(initArticlesPage());
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (
-        <DynamicMuduleLoader reducers={reducers}>
+        <DynamicMuduleLoader reducers={reducers} removeAfterUnmount={false}>
             <Page onScrollEnd={onLoadNextPart} className={cn(cls.ArticlesPage, {}, [className])}>
                 <ArticlesViewSelector currentView={articlesView} onViewClick={onChangeView} />
                 <ArticleList view={articlesView} articles={articles} isLoading={isLoading} />
