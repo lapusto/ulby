@@ -4,6 +4,7 @@ import { userReducer } from 'entities/User';
 import { profileReducer } from 'entities/Profile';
 import { $api } from 'shared/api/api';
 import { articlesPageReducer } from 'pages/AtriclesPage/model/slices/articlePageSlice';
+import { saveScrollReducer } from 'features/saveScroll';
 import { StateSchema } from './StateSchema';
 import { createReducerManager } from './reducerManager';
 
@@ -15,6 +16,7 @@ export function createReduxStore(
         user: userReducer,
         profile: profileReducer,
         articlesPage: articlesPageReducer,
+        scrollPosition: saveScrollReducer,
     };
 
     const reducerManager = createReducerManager(RootReducers);

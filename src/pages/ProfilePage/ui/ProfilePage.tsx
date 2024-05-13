@@ -17,7 +17,7 @@ import {
 } from 'entities/Profile/model/selectors/getProfileValidateError/getProfileValidateError';
 import { Text, TextStyle } from 'shared/ui/Text/Text';
 import { useParams } from 'react-router-dom';
-import { Page } from 'shared/ui/Page/Page';
+import { Page } from 'widgets/Page/Page';
 import { ProfilePageHeader } from './ProfilePageHeader/ProfilePageHeader';
 
 interface ProfilePageProps {
