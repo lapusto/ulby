@@ -36,6 +36,9 @@ export const ArticlesPageFilters: FC<ArticlesPageFiltersProps> = ({ className })
     const onChangeSort = useCallback((sort: ArticleSortField) => {
         dispatch(articlesPageActions.setSort(sort));
     }, [dispatch]);
+    const onChangeSearch = useCallback((search: string) => {
+        dispatch(articlesPageActions.setSearch(search));
+    }, [dispatch]);
 
     return (
         <div className={cn(cls.ArticlesPageFilters, {}, [className])}>
@@ -49,7 +52,7 @@ export const ArticlesPageFilters: FC<ArticlesPageFiltersProps> = ({ className })
                 <ArticlesViewSelector currentView={view} onViewClick={onChangeView} />
             </div>
             <Card className={cls.search}>
-                <Input placeholder="Поиск" />
+                <Input placeholder="Поиск" onChange={onChangeSearch} value={search} />
             </Card>
         </div>
     );
