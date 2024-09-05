@@ -45,8 +45,7 @@ const ArticlesPage: FC<ArticlesPageProps> = ({ className }) => {
         <DynamicMuduleLoader reducers={reducers} removeAfterUnmount={false}>
             <Page onScrollEnd={onLoadNextPart} className={cn(cls.ArticlesPage, {}, [className])}>
                 <ArticlesPageFilters />
-                <ArticlesViewSelector currentView={articlesView} onViewClick={onChangeView} />
-                <ArticleList view={articlesView} articles={articles} isLoading={isLoading} />
+                <ArticleList className={cls.list} view={articlesView} articles={articles} isLoading={isLoading} />
             </Page>
         </DynamicMuduleLoader>
     );
