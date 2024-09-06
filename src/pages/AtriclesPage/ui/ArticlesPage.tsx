@@ -8,6 +8,7 @@ import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { useSelector } from 'react-redux';
 import { ArticlesViewSelector } from 'features/selectArticlesView/ArticlesViewSelector';
 import { Page } from 'widgets/Page/Page';
+import { useSearchParams } from 'react-router-dom';
 import cls from './ArticlesPage.module.scss';
 import { articlesPageReducer, getArticles } from '../model/slices/articlePageSlice';
 import { fetchNextArticlesPage } from '../model/services/fetchNextArticlesPage/fetchNextArticlesPage';
@@ -33,12 +34,14 @@ const ArticlesPage: FC<ArticlesPageProps> = ({ className }) => {
     const isLoading = useSelector(getArticlesPageLoading);
     const articlesView = useSelector(getArticlesPageView);
 
+    const [searchParams] = useSearchParams();
+
     const onLoadNextPart = useCallback(() => {
         dispatch(fetchNextArticlesPage());
     }, [dispatch]);
 
     useEffect(() => {
-        dispatch(initArticlesPage());
+        dispatch(initArticlesPage(searchParams));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (

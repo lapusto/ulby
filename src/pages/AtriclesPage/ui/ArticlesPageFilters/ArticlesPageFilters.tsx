@@ -14,6 +14,7 @@ import { ArticleSortSelector } from 'entities/Article/ui/ArticleSortSelector/Art
 import { SortOrder } from 'shared/types';
 import { ArticleSortField } from 'entities/Article/model/types/article';
 import { fetchArticlesList } from 'pages/AtriclesPage/model/services/fetchArticlesList/fetchArticlesList';
+import { useDebounce } from 'shared/lib/hooks/useDebounce';
 import cls from './ArticlesPageFilters.module.scss';
 
 interface ArticlesPageFiltersProps {
@@ -35,23 +36,25 @@ export const ArticlesPageFilters: FC<ArticlesPageFiltersProps> = ({ className })
         dispatch(fetchArticlesList({ replace: true }));
     }, [dispatch]);
 
+    const debouncedFetchData = useDebounce(fetchData, 500);
+
     const onChangeOrder = useCallback((order: SortOrder) => {
         dispatch(articlesPageActions.setOrder(order));
         dispatch(articlesPageActions.setPage(1));
-        fetchData();
-    }, [dispatch, fetchData]);
+        debouncedFetchData();
+    }, [dispatch, debouncedFetchData]);
 
     const onChangeSort = useCallback((sort: ArticleSortField) => {
         dispatch(articlesPageActions.setSort(sort));
         dispatch(articlesPageActions.setPage(1));
-        fetchData();
-    }, [dispatch, fetchData]);
+        debouncedFetchData();
+    }, [dispatch, debouncedFetchData]);
 
     const onChangeSearch = useCallback((search: string) => {
         dispatch(articlesPageActions.setSearch(search));
         dispatch(articlesPageActions.setPage(1));
-        fetchData();
-    }, [dispatch, fetchData]);
+        debouncedFetchData();
+    }, [dispatch, debouncedFetchData]);
 
     return (
         <div className={cn(cls.ArticlesPageFilters, {}, [className])}>
