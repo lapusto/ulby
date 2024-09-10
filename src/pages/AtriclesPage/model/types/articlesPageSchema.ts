@@ -1,7 +1,7 @@
 import { EntityState } from '@reduxjs/toolkit';
 import { Article } from 'entities/Article';
 import { SortOrder } from 'shared/types';
-import { ArticleSortField, ArticleView } from '../../../../entities/Article/model/types/article';
+import { ArticleSortField, ArticleType, ArticleView } from '../../../../entities/Article/model/types/article';
 
 export interface ArticlesPageSchema extends EntityState<Article> {
     isLoading?: boolean;
@@ -15,6 +15,7 @@ export interface ArticlesPageSchema extends EntityState<Article> {
     order: SortOrder;
     sort: ArticleSortField;
     search: string;
+    type: ArticleType;
 
     _inited: boolean
 }
